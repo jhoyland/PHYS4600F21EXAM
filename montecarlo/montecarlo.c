@@ -6,6 +6,7 @@
 double randrange(double a, double b)
 {
   // TODO: Write a function to generate a random number between x0 and x1
+	if(srand())
 }
 
 double function(double x)
