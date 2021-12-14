@@ -9,6 +9,8 @@ root.wm_title("Calculator exam")
 var_num = tk.StringVar(value="0.0")
 var_sol = tk.StringVar(value="0.0")
 
+display = 0.0
+display1 = 0.0
 runningsum = 0.0
 add = 0
 sub = 0 
@@ -21,8 +23,11 @@ def Add():
     global sub
     global div
     global mult
+    global display
     num = float(var_num.get())
     runningsum = num
+    display += num
+    var_sol.set(display)
     add = 1
     sub = 0 
     div = 0
@@ -34,8 +39,11 @@ def Sub():
     global sub
     global div
     global mult
+    global display1
     num = float(var_num.get())
     runningsum = num
+    display1 -= num
+    var_sol.set(display1)
     add = 0
     sub = 1 
     div = 0
@@ -73,12 +81,14 @@ def Clear():
     global sub
     global div
     global mult
+    global display
     runningsum = 0.0
     var_sol.set(runningsum) 
     add = 0
     sub = 0 
     div = 0
     mult = 0
+    display = 0.0
 
 def Calc():
     global runningsum
@@ -86,9 +96,13 @@ def Calc():
     global sub
     global div
     global mult
+    global display
     num = float(var_num.get()) 
     if (add == 1): 
-        runningsum += num
+        if (display != 0.0):
+            runningsum = display +num
+        else:
+            runningsum += num
     elif (sub == 1):
         runningsum -= num
     elif (div == 1): 
@@ -98,6 +112,7 @@ def Calc():
     else:
         print("Error!")
     var_sol.set(runningsum)
+    display = 0.0
     
 # entry windows
 label_num = tk.Label(root,text = "Enter Numbers:", width=15)
